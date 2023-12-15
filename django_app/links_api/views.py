@@ -10,13 +10,14 @@ from links_api.models import Link
 class LinkView(APIView):
     def post(self, request):
         serializer = LinkInputSerializer(data=request.data)
-        if serializer.is_valid():
-            link_model = Link(url=request.data.get('url'))
-            link_model.save()
-            return Response(status=status.HTTP_201_CREATED)
+        serializer.is_valid(raise_exception=True)
+        link_model = Link(url=request.data.get('url'))
+        link_model.save()
+        return Response(status=status.HTTP_201_CREATED)
 
     def get(self, request, *args, **kwargs):
         links = Link.objects.all()
+        links = sorted(links, key=lambda x: x.score)
         serializer = LinkOutputSerializer(links, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

@@ -9,5 +9,7 @@ class LinkOutputSerializer(serializers.ModelSerializer):
         fields = ['id', 'created', 'url', 'upvotes', 'downvotes', 'score']
 
 
-class LinkInputSerializer(serializers.Serializer):
-    url = serializers.URLField()
+class LinkInputSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Link
+        fields = ['url']
