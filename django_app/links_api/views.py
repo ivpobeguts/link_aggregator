@@ -32,11 +32,12 @@ class DownvoteView(APIView):
 
 
 def _post_vote(link_id: int, vote_type: str) -> Response:
-    link = Link.objects.get(pk=link_id)
-    if link:
-        setattr(link, vote_type, getattr(link, vote_type) + 1)
-        link.save()
-        serializer = LinkOutputSerializer(link)
-        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+    try:
+        link = Link.objects.get(pk=link_id)
+    except Link.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
-    return Response(status=status.HTTP_404_NOT_FOUND)
+    setattr(link, vote_type, getattr(link, vote_type) + 1)
+    link.save()
+    serializer = LinkOutputSerializer(link)
+    return Response(data=serializer.data, status=status.HTTP_201_CREATED)
