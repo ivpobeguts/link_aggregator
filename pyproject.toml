@@ -1,17 +1,15 @@
 [tool.poetry]
-name = "link_aggregator"
+name = "django_app"
 version = "0.1.0"
 description = ""
-authors = ["ivanpobeguts <Ivan.Pobeguc@gmail.com>"]
+authors = ["ivanpobeguts <ivpobeguts@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
 django = "^5.0"
 djangorestframework = "^3.14.0"
-
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.4.3"
+django-rest-swagger = "^2.2.0"
+drf-yasg = "^1.21.7"
 
 [build-system]
 requires = ["poetry-core"]

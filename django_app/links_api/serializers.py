@@ -1,6 +1,5 @@
-from rest_framework import serializers
-
 from links_api.models import Link
+from rest_framework import serializers
 
 
 class LinkOutputSerializer(serializers.ModelSerializer):

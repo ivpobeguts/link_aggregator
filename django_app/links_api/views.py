@@ -1,10 +1,8 @@
-from rest_framework.views import APIView
+from links_api.models import Link
+from links_api.serializers import LinkInputSerializer, LinkOutputSerializer
 from rest_framework import status
 from rest_framework.response import Response
-
-from links_api.serializers import LinkOutputSerializer, LinkInputSerializer
-
-from links_api.models import Link
+from rest_framework.views import APIView
 
 
 class LinkView(APIView):

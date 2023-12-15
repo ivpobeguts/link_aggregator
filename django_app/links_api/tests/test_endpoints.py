@@ -1,8 +1,9 @@
 import json
-from rest_framework import status
-from django.test import TestCase, Client
+
+from django.test import Client, TestCase
 from django.urls import reverse
 from links_api.models import Link
+from rest_framework import status
 
 client = Client()
 
@@ -45,7 +46,7 @@ class LinksEndpointTest(TestCase):
         link_1.save()
         link_2 = Link(url='https://docs.djangoproject.com/', upvotes=5, downvotes=3)
         link_2.save()
-        link_3= Link(url='https://github.com/', upvotes=5, downvotes=5)
+        link_3 = Link(url='https://github.com/', upvotes=5, downvotes=5)
         link_3.save()
         response = client.get(reverse('get_post_links'))
 
