@@ -21,5 +21,5 @@ from links_api import urls as links_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('links/api/v1', include(links_urls)),
+    path('api/links', include(links_urls)),
 ]
