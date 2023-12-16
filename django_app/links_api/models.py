@@ -2,6 +2,8 @@ from django.db import models
 
 
 class Link(models.Model):
+    """This class describes the Link model"""
+
     url = models.URLField()
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)

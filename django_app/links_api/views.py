@@ -1,3 +1,5 @@
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from links_api.models import Link
 from links_api.serializers import LinkInputSerializer, LinkOutputSerializer
 from rest_framework import status
@@ -6,6 +8,8 @@ from rest_framework.views import APIView
 
 
 class LinkView(APIView):
+    """Link view for handling get and post requests"""
+
     def post(self, request):
         serializer = LinkInputSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -21,16 +25,43 @@ class LinkView(APIView):
 
 
 class UpvoteView(APIView):
+    """View allows to add +1 to the Link upvotes"""
+
+    @swagger_auto_schema(manual_parameters=[
+        openapi.Parameter(
+            'link_id',
+            openapi.IN_PATH,
+            description='Link identifier',
+            type=openapi.TYPE_INTEGER,
+            required=True
+        )
+    ])
     def post(self, request, link_id):
         return _post_vote(link_id=link_id, vote_type="upvotes")
 
 
 class DownvoteView(APIView):
+    """View allows to add +1 to the Link downvotes"""
+
+    @swagger_auto_schema(manual_parameters=[
+        openapi.Parameter(
+            'link_id',
+            openapi.IN_PATH,
+            description='Link identifier',
+            type=openapi.TYPE_INTEGER,
+            required=True
+        )
+    ])
     def post(self, request, link_id):
         return _post_vote(link_id=link_id, vote_type="downvotes")
 
 
 def _post_vote(link_id: int, vote_type: str) -> Response:
+    """The purpose of this function is to avoid code repetition
+    :param link_id: id of link which is voted for
+    :param vote_type: type of the vote: upvotes or downvotes
+    """
+
     try:
         link = Link.objects.get(pk=link_id)
     except Link.DoesNotExist:
