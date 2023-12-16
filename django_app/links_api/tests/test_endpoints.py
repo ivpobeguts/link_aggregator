@@ -41,6 +41,18 @@ class LinksEndpointTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response.data['url'][0], 'Enter a valid URL.')
 
+    def test_create_link_wrong_param_name(self):
+        response = client.post(
+            reverse('get_post_links'),
+            data=json.dumps({
+                'link_url': self.valid_url
+            }),
+            content_type='application/json'
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(response.data['url'][0], 'This field is required.')
+
     def test_get_links_sorted_by_score(self):
         link_1 = Link(url=self.valid_url, upvotes=3, downvotes=5)
         link_1.save()
