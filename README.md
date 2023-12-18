@@ -4,7 +4,7 @@ This is not a real API and is used for the sake of exercise.
 
 ## Prepare runtime
 1. Install python 3.11.
-2. [Install](https://python-poetry.org/docs/#installing-with-the-official-installer) poetry for python 3.11
+2. [Install](https://python-poetry.org/docs/#installing-with-the-official-installer) poetry for python 3.11 or newer version.
 3. Allow poetry to use its own virtual environment:
 ```shell script
 poetry config virtualenvs.in-project true
@@ -13,7 +13,6 @@ poetry config virtualenvs.in-project true
 ```shell script
 poetry install
 ```
-5. CD to the django_app folder where manage.py file is located.
 6. Apply migrations:
 ```shell script
 make migrate
